@@ -1,6 +1,7 @@
 # WPF ProgressBar 控件演示项目
 
 这是一个基于.NET Core 8.0的WPF应用程序，用于演示ProgressBar控件的各种用法和功能。
+![image](https://github.com/user-attachments/assets/b3af6ac3-9f77-4722-87ae-9cf1a024ec6c)
 
 ## 项目结构
 
