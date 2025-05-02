@@ -1,0 +1,23 @@
+﻿<Application x:Class="ProgressBarDemo.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ProgressBarDemo"
+             xmlns:helpers="clr-namespace:ProgressBarDemo.Helpers"
+             xmlns:converters="clr-namespace:ProgressBarDemo.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ProgressBarStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!-- 添加转换器 -->
+            <helpers:BooleanToOppositeBooleanConverter x:Key="BooleanToOppositeBooleanConverter"/>
+            <helpers:IndeterminateButtonTextConverter x:Key="IndeterminateButtonTextConverter"/>
+            <helpers:IndeterminateModeTextConverter x:Key="IndeterminateModeTextConverter"/>
+            <helpers:StyleSelectorConverter x:Key="StyleSelectorConverter"/>
+            <helpers:FileSizeConverter x:Key="FileSizeConverter"/>
+            <converters:ProgressBarWidthConverter x:Key="ProgressBarWidthConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

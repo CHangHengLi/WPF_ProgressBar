@@ -1,0 +1,71 @@
+﻿<Window x:Class="ProgressBarDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProgressBarDemo"
+        xmlns:views="clr-namespace:ProgressBarDemo.Views"
+        xmlns:viewmodels="clr-namespace:ProgressBarDemo.ViewModels"
+        xmlns:helpers="clr-namespace:ProgressBarDemo.Helpers"
+        mc:Ignorable="d"
+        Title="WPF ProgressBar 控件演示" Height="600" Width="900">
+    
+    <Window.Resources>
+        <helpers:BooleanToOppositeBooleanConverter x:Key="BooleanToOppositeBooleanConverter"/>
+        <helpers:IndeterminateButtonTextConverter x:Key="IndeterminateButtonTextConverter"/>
+        <helpers:IndeterminateModeTextConverter x:Key="IndeterminateModeTextConverter"/>
+        <helpers:StyleSelectorConverter x:Key="StyleSelectorConverter"/>
+        <helpers:FileSizeConverter x:Key="FileSizeConverter"/>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- 左侧导航面板 -->
+        <Border Grid.Column="0" Background="#F5F5F5" BorderBrush="#E5E5E5" BorderThickness="0,0,1,0">
+            <StackPanel Margin="10">
+                <TextBlock Text="ProgressBar控件演示" FontWeight="Bold" FontSize="16" Margin="0,0,0,20"/>
+                
+                <ListBox ItemsSource="{Binding DemoPages}" 
+                        SelectedItem="{Binding SelectedDemo}"
+                        BorderThickness="0"
+                        Background="Transparent">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Margin="5"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
+                <TextBlock Text="WPF .NET Core 8.0" 
+                           Margin="0,20,0,0" 
+                           FontStyle="Italic" 
+                           Foreground="Gray"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- 右侧内容区域 -->
+        <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewmodels:BasicDemoViewModel}">
+                    <views:BasicDemoView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:IndeterminateDemoViewModel}">
+                    <views:IndeterminateDemoView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:ThreadingDemoViewModel}">
+                    <views:ThreadingDemoView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:CustomStyleDemoViewModel}">
+                    <views:CustomStyleDemoView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:FileDownloadViewModel}">
+                    <views:FileDownloadView/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</Window>

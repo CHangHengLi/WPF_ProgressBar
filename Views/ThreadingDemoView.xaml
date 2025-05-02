@@ -1,0 +1,59 @@
+<UserControl
+    x:Class="ProgressBarDemo.Views.ThreadingDemoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ProgressBarDemo.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="AntiqueWhite"
+    mc:Ignorable="d">
+    <Grid Margin="20">
+        <StackPanel>
+            <TextBlock
+                Margin="0,0,0,20"
+                FontSize="18"
+                FontWeight="Bold"
+                Text="多线程环境中更新ProgressBar示例" />
+
+            <TextBlock
+                Margin="0,0,0,20"
+                Text="在WPF中，UI元素（包括ProgressBar）只能在创建它们的线程上更新。此示例展示如何在后台线程执行任务的同时更新UI上的进度条。"
+                TextWrapping="Wrap" />
+
+            <!--  进度条  -->
+            <TextBlock Margin="0,0,0,5" Text="进度:" />
+            <ProgressBar
+                Height="20"
+                Margin="0,0,0,10"
+                Value="{Binding ProgressValue}" />
+
+            <!--  状态文本  -->
+            <TextBlock
+                Margin="0,0,0,20"
+                FontWeight="SemiBold"
+                Text="{Binding StatusText}" />
+
+            <!--  操作按钮  -->
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    Width="100"
+                    Margin="0,0,10,0"
+                    Command="{Binding StartProcessCommand}"
+                    Content="开始处理" />
+
+                <Button
+                    Width="100"
+                    Command="{Binding CancelProcessCommand}"
+                    Content="取消" />
+            </StackPanel>
+
+            <TextBlock
+                Margin="0,20,0,0"
+                FontStyle="Italic"
+                Foreground="Gray"
+                Text="本示例使用Task和Progress&lt;T&gt;来实现后台处理和进度报告" />
+        </StackPanel>
+    </Grid>
+</UserControl> 

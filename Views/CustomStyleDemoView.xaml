@@ -1,0 +1,130 @@
+<UserControl
+    x:Class="ProgressBarDemo.Views.CustomStyleDemoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ProgressBarDemo.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="AntiqueWhite"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ProgressBarStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Margin="20">
+        <StackPanel>
+            <TextBlock
+                Margin="0,0,0,20"
+                FontSize="18"
+                FontWeight="Bold"
+                Text="自定义ProgressBar样式示例" />
+
+            <TextBlock
+                Margin="0,0,0,20"
+                Text="WPF的ProgressBar控件可以通过样式和模板完全自定义外观。以下展示了几种自定义样式。"
+                TextWrapping="Wrap" />
+
+            <!--  样式选择  -->
+            <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
+                <TextBlock
+                    Margin="0,0,10,0"
+                    VerticalAlignment="Center"
+                    Text="选择样式:" />
+                <ComboBox
+                    Width="150"
+                    ItemsSource="{Binding AvailableStyles}"
+                    SelectedItem="{Binding SelectedStyle}" />
+                <Button
+                    Margin="20,0,0,0"
+                    Command="{Binding UpdateProgressCommand}"
+                    Content="随机更新进度" />
+            </StackPanel>
+
+            <!--  当前进度值  -->
+            <TextBlock
+                Margin="0,0,0,20"
+                FontWeight="SemiBold"
+                Text="{Binding ProgressValue, StringFormat=当前进度值: {0:0}%}" />
+
+            <Border
+                Margin="0,0,0,10"
+                Padding="10"
+                BorderBrush="#DDDDDD"
+                BorderThickness="1">
+                <StackPanel>
+                    <!--  默认样式  -->
+                    <TextBlock
+                        Margin="0,0,0,5"
+                        Text="默认样式:"
+                        Visibility="{Binding SelectedStyle, Converter={StaticResource StyleSelectorConverter}, ConverterParameter=默认样式}" />
+                    <ProgressBar
+                        Height="20"
+                        Margin="0,0,0,20"
+                        Visibility="{Binding SelectedStyle, Converter={StaticResource StyleSelectorConverter}, ConverterParameter=默认样式}"
+                        Value="{Binding ProgressValue}" />
+
+                    <!--  圆角样式  -->
+                    <TextBlock
+                        Margin="0,0,0,5"
+                        Text="圆角样式:"
+                        Visibility="{Binding SelectedStyle, Converter={StaticResource StyleSelectorConverter}, ConverterParameter=圆角样式}" />
+                    <ProgressBar
+                        Height="20"
+                        Margin="0,0,0,20"
+                        Style="{StaticResource RoundedProgressBar}"
+                        Visibility="{Binding SelectedStyle, Converter={StaticResource StyleSelectorConverter}, ConverterParameter=圆角样式}"
+                        Value="{Binding ProgressValue}" />
+
+                    <!--  渐变样式  -->
+                    <TextBlock
+                        Margin="0,0,0,5"
+                        Text="渐变样式:"
+                        Visibility="{Binding SelectedStyle, Converter={StaticResource StyleSelectorConverter}, ConverterParameter=渐变样式}" />
+                    <ProgressBar
+                        Height="20"
+                        Margin="0,0,0,20"
+                        Style="{StaticResource GradientProgressBar}"
+                        Visibility="{Binding SelectedStyle, Converter={StaticResource StyleSelectorConverter}, ConverterParameter=渐变样式}"
+                        Value="{Binding ProgressValue}" />
+
+                    <!--  动画样式  -->
+                    <TextBlock
+                        Margin="0,0,0,5"
+                        Text="动画样式:"
+                        Visibility="{Binding SelectedStyle, Converter={StaticResource StyleSelectorConverter}, ConverterParameter=动画样式}" />
+                    <ProgressBar
+                        Height="20"
+                        Margin="0,0,0,20"
+                        Style="{StaticResource AnimatedProgressBar}"
+                        Visibility="{Binding SelectedStyle, Converter={StaticResource StyleSelectorConverter}, ConverterParameter=动画样式}"
+                        Value="{Binding ProgressValue}" />
+
+                    <!--  带文本样式  -->
+                    <TextBlock
+                        Margin="0,0,0,5"
+                        Text="带文本样式:"
+                        Visibility="{Binding SelectedStyle, Converter={StaticResource StyleSelectorConverter}, ConverterParameter=带文本样式}" />
+                    <ProgressBar
+                        Height="25"
+                        Margin="0,0,0,20"
+                        Style="{StaticResource TextProgressBar}"
+                        Visibility="{Binding SelectedStyle, Converter={StaticResource StyleSelectorConverter}, ConverterParameter=带文本样式}"
+                        Value="{Binding ProgressValue}" />
+                </StackPanel>
+            </Border>
+
+            <TextBlock
+                Margin="0,10,0,0"
+                FontStyle="Italic"
+                Foreground="Gray"
+                Text="提示: 自定义样式的核心是通过重写ControlTemplate并自定义PART_Indicator元素的外观。"
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </Grid>
+</UserControl> 
